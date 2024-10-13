@@ -1,8 +1,8 @@
-const pop = 'assets/images/pop.png';
-const quoridor = 'assets/images/quoridor.png';
-const nt = 'assets/images/nt.png';
-const wdc = 'assets/images/wdc.png';
-const wordgame = 'assets/images/wordgame.png';
+const pop = './assets/images/pop.png';
+const quoridor = './assets/images/quoridor.png';
+const nt = './assets/images/nt.png';
+const wdc = './assets/images/wdc.png';
+const wordgame = './assets/images/wordgame.png';
 
 export interface Project {
   title: string;
