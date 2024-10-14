@@ -24,7 +24,7 @@ function App() {
         <KeyboardControls map={map}>
           <Canvas shadows camera={{ position: [0, 6, 14], fov: 30 }}>
             <Suspense>
-              <Physics debug>
+              <Physics debug={!process.env.NODE_ENV || process.env.NODE_ENV === 'development'}>
                 <OrbitControls />
                 <ThreeScene />
               </Physics>
