@@ -10,6 +10,7 @@ import { RigidBody } from '@react-three/rapier';
 import { extend } from '@react-three/fiber';
 import { Mesh, MeshStandardMaterial } from 'three';
 import { geometry } from 'maath';
+import CollidableText from './CollidableText';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -55,9 +56,7 @@ export function Television({ imageUrl, title, rotation, position, ...props }: Te
         )}
       </group>
       {title ? (
-        <Text position={[0, 0, -2]} rotation={[Math.PI / 2, Math.PI, 0]}>
-          {title}
-        </Text>
+        <CollidableText title={title} />
       ) : (
         <></>
       )}

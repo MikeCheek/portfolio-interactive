@@ -2,7 +2,7 @@ import { ContactShadows, Cylinder } from '@react-three/drei';
 import { CuboidCollider, CylinderCollider, RigidBody } from '@react-three/rapier';
 import React from 'react';
 
-const color = '#af9c30';
+const color = '#232323';
 
 const Room = () => {
   const dim = 70;

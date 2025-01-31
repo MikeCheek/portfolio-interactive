@@ -43,7 +43,7 @@ const Rig = (props: GroupProps) => {
   const ref = useRef<Group<Object3DEventMap>>(null);
   useFrame((state, delta) => {
     if (ref.current) {
-      if (ref.current.rotation) ref.current.rotation.y -= delta / 10; // Rotate contents
+      if (ref.current.rotation) ref.current.rotation.y -= (delta / 10) % 360; // Rotate contents
       if (state.events.update) state.events.update(); // Raycasts every frame rather than on pointer-move
     }
   });
