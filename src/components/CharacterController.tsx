@@ -89,7 +89,7 @@ const CharacterController = () => {
         scale={[0.5, 0.5, 0.5]}
         enabledRotations={[false, false, false]}
         onCollisionEnter={({ other }) => {
-          if (other.rigidBodyObject?.name === "floor") setIsOnFloor(true);
+          setIsOnFloor(true);
         }}
         onIntersectionEnter={({ other }) => {
           if (other.rigidBodyObject?.name === "void") {
