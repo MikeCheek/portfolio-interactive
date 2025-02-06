@@ -13,6 +13,9 @@ const Projects = () => {
             rotation={[0, Math.PI, 0]}
             imageUrl={project.image}
             title={project.title}
+            description={project.description}
+            href={project.href}
+            github={project.github}
           />
         </>
       ))}

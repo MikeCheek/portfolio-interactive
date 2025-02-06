@@ -4,7 +4,7 @@ Command: npx gltfjsx@6.5.2 public/assets/models/Television.glb --types -t
 */
 
 import React from 'react';
-import { Image, Text, useGLTF } from '@react-three/drei';
+import { Image, useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { RigidBody } from '@react-three/rapier';
 import { extend } from '@react-three/fiber';
@@ -31,11 +31,14 @@ type Body = JSX.IntrinsicElements['group'];
 interface TelevisionTypes extends Body {
   imageUrl?: string;
   title?: string;
+  description?: string;
+  href?: string,
+  github?: string
 }
 
 extend({ RoundedPlaneGeometry: geometry.RoundedPlaneGeometry });
 
-export function Television({ imageUrl, title, rotation, position, ...props }: TelevisionTypes) {
+export function Television({ imageUrl, title, rotation, position, description, href, github, ...props }: TelevisionTypes) {
   const { nodes, materials } = useGLTF('/assets/models/Television.glb') as GLTFResult;
   return (
     <RigidBody name="television" rotation={rotation} position={position}>
@@ -56,7 +59,7 @@ export function Television({ imageUrl, title, rotation, position, ...props }: Te
         )}
       </group>
       {title ? (
-        <CollidableText title={title} />
+        <CollidableText title={title} description={description} href={href} github={github} />
       ) : (
         <></>
       )}

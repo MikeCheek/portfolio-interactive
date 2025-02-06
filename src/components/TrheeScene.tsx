@@ -4,7 +4,7 @@ import CharacterController from './CharacterController';
 import Room from './Room';
 import Domino from './Domino';
 import Projects from './Projects';
-import Carousel from './Carousel';
+// import Carousel from './Carousel';
 // import { useFrame } from '@react-three/fiber';
 // import { easing } from 'maath';
 
@@ -16,7 +16,7 @@ const ThreeScene: React.FC = () => {
     <>
       <Environment preset="sunset" />
       <pointLight position={[10, 10, 10]} />
-      <Carousel />
+      {/* <Carousel /> */}
 
       <group position={[0, -1, 0]}>
         <Room />

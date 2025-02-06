@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import ThreeScene from './components/TrheeScene';
 import { Physics } from '@react-three/rapier';
 import { Controls } from './utilities/controls';
-import { KeyboardControls, Loader, OrbitControls } from '@react-three/drei';
+import { KeyboardControls, Loader } from '@react-three/drei';
 import './App.css';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
       { name: Controls.left, keys: ['ArrowLeft', 'KeyA'] },
       { name: Controls.right, keys: ['ArrowRight', 'KeyD'] },
       { name: Controls.jump, keys: ['Space'] },
+      { name: Controls.shift, keys: ['Shift'] },
     ],
     []
   );
@@ -25,7 +26,7 @@ function App() {
           <Canvas shadows camera={{ position: [0, 6, 14], fov: 30 }}>
             <Suspense>
               <Physics debug={!process.env.NODE_ENV || process.env.NODE_ENV === 'development'}>
-                <OrbitControls />
+                {/* <OrbitControls /> */}
                 <ThreeScene />
               </Physics>
             </Suspense>

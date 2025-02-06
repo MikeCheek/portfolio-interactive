@@ -1,10 +1,10 @@
-import { useRef, useState } from 'react';
-import { CapsuleCollider, RigidBody, vec3 } from '@react-three/rapier';
-import { useKeyboardControls } from '@react-three/drei';
-import { Controls, JUMP_FORCE, MAX_VEL, MOVEMENT_SPEED } from '../utilities/controls';
-import { useFrame } from '@react-three/fiber';
-import { Group, Vector3 } from 'three';
-import MeshComponent from './MeshComponent';
+import { useRef, useState } from "react";
+import { CapsuleCollider, RigidBody, vec3 } from "@react-three/rapier";
+import { useKeyboardControls } from "@react-three/drei";
+import { Controls, JUMP_FORCE, MAX_VEL, MOVEMENT_SPEED } from "../utilities/controls";
+import { useFrame } from "@react-three/fiber";
+import { Group, Vector3 } from "three";
+import MeshComponent from "./MeshComponent";
 
 const CharacterController = () => {
   const jumpPressed = useKeyboardControls((state) => state[Controls.jump]);
@@ -12,6 +12,7 @@ const CharacterController = () => {
   const rightPressed = useKeyboardControls((state) => state[Controls.right]);
   const backPressed = useKeyboardControls((state) => state[Controls.back]);
   const forwardPressed = useKeyboardControls((state) => state[Controls.forward]);
+  const shiftPressed = useKeyboardControls((state) => state[Controls.shift]); // Detect Shift Key
 
   const ref = useRef(null);
   const refCharacter = useRef<Group>(null);
@@ -26,25 +27,29 @@ const CharacterController = () => {
     const linvel = obj.linvel();
     let changeRotation = false;
 
+    const speedMultiplier = shiftPressed ? 1.5 : 1; // Double speed when Shift is pressed
+    const adjustedSpeed = MOVEMENT_SPEED * speedMultiplier;
+    const maxVelocity = MAX_VEL * speedMultiplier;
+
     if (jumpPressed && isOnFloor) {
       impulse.y += JUMP_FORCE;
       setIsOnFloor(false);
     }
 
-    if (rightPressed && linvel.x < MAX_VEL) {
-      impulse.x += MOVEMENT_SPEED;
+    if (rightPressed && linvel.x < maxVelocity) {
+      impulse.x += adjustedSpeed;
       changeRotation = true;
     }
-    if (leftPressed && linvel.x > -MAX_VEL) {
-      impulse.x -= MOVEMENT_SPEED;
+    if (leftPressed && linvel.x > -maxVelocity) {
+      impulse.x -= adjustedSpeed;
       changeRotation = true;
     }
-    if (backPressed && linvel.z < MAX_VEL) {
-      impulse.z += MOVEMENT_SPEED;
+    if (backPressed && linvel.z < maxVelocity) {
+      impulse.z += adjustedSpeed;
       changeRotation = true;
     }
-    if (forwardPressed && linvel.z > -MAX_VEL) {
-      impulse.z -= MOVEMENT_SPEED;
+    if (forwardPressed && linvel.z > -maxVelocity) {
+      impulse.z -= adjustedSpeed;
       changeRotation = true;
     }
 
@@ -65,7 +70,6 @@ const CharacterController = () => {
     state.camera.position.z = characterWorldPosition.z + 14;
 
     const targetLookAt = new Vector3(characterWorldPosition.x, 0, characterWorldPosition.z);
-
     state.camera.lookAt(targetLookAt);
   });
 
@@ -81,11 +85,14 @@ const CharacterController = () => {
       <RigidBody
         colliders={false}
         ref={ref}
+        name="character"
         scale={[0.5, 0.5, 0.5]}
         enabledRotations={[false, false, false]}
-        onCollisionEnter={() => setIsOnFloor(true)}
+        onCollisionEnter={({ other }) => {
+          if (other.rigidBodyObject?.name === "floor") setIsOnFloor(true);
+        }}
         onIntersectionEnter={({ other }) => {
-          if (other.rigidBodyObject?.name === 'void') {
+          if (other.rigidBodyObject?.name === "void") {
             resetPosition();
           }
         }}

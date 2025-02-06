@@ -1,33 +1,35 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Text } from "@react-three/drei";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import PopUp from "./PopUp";
 
-const CollidableText = ({ title }: { title: string }) => {
-  const [glow, setGlow] = useState(false);
+const CollidableText = ({ title, description, href, github }: { title: string; description?: string, href?: string, github?: string }) => {
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   return (
     <RigidBody
       type="dynamic"
       colliders="cuboid"
       position={[0, 0, -2.5]}
-      onCollisionEnter={() => {
-        setGlow(true);
-        // setTimeout(() => setGlow(false), 500); // Reset glow after 0.5s
+      onCollisionEnter={({ other }) => {
+        if (other.rigidBodyObject?.name === 'character') setShowPopup(true)
       }}
-      onCollisionExit={() => {
-        setGlow(false)
+      onCollisionExit={({ other }) => {
+        if (other.rigidBodyObject?.name === 'character') setShowPopup(false)
       }}
     >
-      <CuboidCollider args={[5, 0.01, 1]} /> {/* Width = 5, Height = 10, Depth = 1 */}
+      <CuboidCollider args={[5, 0.01, 1]} /> {/* Collider dimensions */}
+
+      {/* 3D Text */}
       <Text rotation={[Math.PI / 2, Math.PI, 0]} maxWidth={10} textAlign="center">
-        <meshStandardMaterial
-          color="white"
-          emissive={glow ? "yellow" : "black"}
-          emissiveIntensity={glow ? 2 : 0}
-          toneMapped={false} // Ensures emissive color stays bright
-        />
+        <meshStandardMaterial color="white" />
         {title}
       </Text>
+
+      {/* Popup UI */}
+      {showPopup ? (
+        <PopUp title={title} description={description ?? ''} href={href} github={github} />
+      ) : <></>}
     </RigidBody>
   );
 };
