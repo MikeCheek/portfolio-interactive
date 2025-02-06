@@ -5,6 +5,7 @@ import { Physics } from '@react-three/rapier';
 import { Controls } from './utilities/controls';
 import { KeyboardControls, Loader } from '@react-three/drei';
 import './App.css';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   const map = useMemo(
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <div className="App">
+      <Analytics />
       <main className="App-main">
         <KeyboardControls map={map}>
           <Canvas shadows camera={{ position: [0, 6, 14], fov: 30 }}>
