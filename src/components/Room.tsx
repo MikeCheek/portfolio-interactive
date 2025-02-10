@@ -18,7 +18,7 @@ const Room = () => {
 };
 
 const Floor = () => {
-  const radius = 50;
+  const radius = 70;
   return (
     <RigidBody colliders={false} type="fixed" position={[0, -0.5, 0]} friction={2} name="floor">
       <CylinderCollider args={[1 / 2, radius]} />

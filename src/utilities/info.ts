@@ -20,7 +20,7 @@ export interface Project {
   href?: string
   github?: string
   reduce_opacity?: boolean
-  // video?: string;
+  video?: string
   technologies?: string[]
   tools?: string[]
 }
@@ -37,7 +37,7 @@ export const projectsList: Project[] = [
     Project developed for Machine Learning for CV course at ESILV.`,
     github:
       'https://github.com/MikeCheek/Semantic-Segmentation-of-Underwater-Imagery',
-    // vidyyeo: require('../assets/videos/segmented.mp4'),
+    // vidyyeo: '../assets/videos/segmented.mp4'),
     technologies: ['Python', 'OpenCV', 'PyTorch', 'MatplotLib', 'NumPy'],
     tools: ['Machine Learning for Computer Vision', 'Segmentation models']
   },
@@ -62,7 +62,7 @@ export const projectsList: Project[] = [
       In the background is implemented a working <a href="https://en.wikipedia.org/wiki/Flocking" class="link" rel="noopener noreferrer" alt="Flocking simulation">Flocking simulation</a> (to be activated by clicking on "Animate Background")`,
     href: 'https://nt.syskrack.org',
     github: 'https://github.com/MikeCheek/naturalmente-tecnologici',
-    // video: require('../assets/videos/nt-new.mp4'),
+    video: '../assets/videos/nt-new.mp4',
     technologies: ['GatsbyJs', 'Typescript', 'Sass'],
     tools: ['FTP Deploy Action']
   },
@@ -74,7 +74,7 @@ export const projectsList: Project[] = [
 The aim of the project was to acquire full confidence in using the KEIL software debug environment to emulate the behaviour of the LPC1768 and the LANDTIGER board.<br/><br/>
 To achieve this result we were asked to develop a working reprodution of the Quoridor game.`,
     github: 'https://github.com/MikeCheek/ASE-Extrapoint-1-Quoridor',
-    // video: require('../assets/videos/quoridor.mp4'),
+    video: '../assets/videos/quoridor.mp4',
     technologies: ['C', 'ARM Assembly'],
     tools: ['Keil']
   },
@@ -88,7 +88,7 @@ To achieve this result we were asked to develop a working reprodution of the Quo
     Visit the site and try to click on bubbles!`,
     href: 'https://pop-funding.vercel.app',
     github: 'https://github.com/MikeCheek/pop-funding',
-    // video: require('../assets/videos/pop.mp4'),
+    video: '../assets/videos/pop.mp4',
     technologies: ['NextJs', 'Typescript', 'TailwindCSS'],
     tools: ['ESLint', 'Prettier']
   },

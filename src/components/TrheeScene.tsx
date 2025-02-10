@@ -4,6 +4,7 @@ import CharacterController from './CharacterController';
 import Room from './Room';
 import Domino from './Domino';
 import Projects from './Projects';
+import { Vector3 } from 'three';
 // import Carousel from './Carousel';
 // import { useFrame } from '@react-three/fiber';
 // import { easing } from 'maath';
@@ -21,7 +22,7 @@ const ThreeScene: React.FC = () => {
       <group position={[0, -1, 0]}>
         <Room />
         <Domino />
-        <Projects />
+        <Projects position={new Vector3(-30, 0, -30)} />
         <CharacterController />
       </group>
     </>

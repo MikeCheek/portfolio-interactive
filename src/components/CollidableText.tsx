@@ -18,17 +18,15 @@ const CollidableText = ({ title, description, href, github }: { title: string; d
         if (other.rigidBodyObject?.name === 'character') setShowPopup(false)
       }}
     >
-      <CuboidCollider args={[5, 0.01, 1]} /> {/* Collider dimensions */}
+      <CuboidCollider args={[5, 0.01, 3]} />
 
-      {/* 3D Text */}
       <Text rotation={[Math.PI / 2, Math.PI, 0]} maxWidth={10} textAlign="center">
         <meshStandardMaterial color="white" />
         {title}
       </Text>
 
-      {/* Popup UI */}
       {showPopup ? (
-        <PopUp title={title} description={description ?? ''} href={href} github={github} />
+        <PopUp title={title} description={description ?? ''} href={href} github={github} close={() => setShowPopup(false)} />
       ) : <></>}
     </RigidBody>
   );
