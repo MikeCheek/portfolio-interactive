@@ -17,7 +17,7 @@ const JoystickControls = ({ onMoveFunc }) => {
   return (
     <div style={styles.container}> 
       <ReactNipple
-        options={{ mode: "static", position: { right: "50px", bottom: "50px" }}}
+        options={{ mode: "static", position: { right: "70px", bottom: "50px" }}}
         onMove={(event, data) => {
           if (data.direction) onMoveFunc(data.direction.angle);
         }}
@@ -31,7 +31,7 @@ const styles = {
   container: {
     position: "absolute",
     bottom: "50px",
-    right: "50px",
+    right: "70px",
     zIndex: 1000,
   },
 };

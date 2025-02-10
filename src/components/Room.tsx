@@ -4,8 +4,10 @@ import React from 'react';
 
 const color = '#232323';
 
+const radius = 70
+const dim = radius * 1.5
+
 const Room = () => {
-  const dim = 70;
   return (
     <>
       <RigidBody colliders={false} type="fixed" name="void">
@@ -18,7 +20,6 @@ const Room = () => {
 };
 
 const Floor = () => {
-  const radius = 70;
   return (
     <RigidBody colliders={false} type="fixed" position={[0, -0.5, 0]} friction={2} name="floor">
       <CylinderCollider args={[1 / 2, radius]} />
