@@ -1,5 +1,5 @@
 import React from 'react';
-import { Environment } from '@react-three/drei';
+import { Environment, OrbitControls, Stars } from '@react-three/drei';
 import CharacterController from './CharacterController';
 import Room from './Room';
 import Domino from './Domino';
@@ -16,7 +16,9 @@ const ThreeScene: React.FC = () => {
   return (
     <>
       <Environment preset="sunset" />
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
       <pointLight position={[10, 10, 10]} />
+      <OrbitControls />
       {/* <Carousel /> */}
 
       <group position={[0, -1, 0]}>
