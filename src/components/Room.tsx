@@ -63,8 +63,8 @@ const Floor = () => {
 
   return (
     <RigidBody colliders={false} type="fixed" position={[0, -0.5, 0]} friction={2} name="floor">
-      <CuboidCollider args={[floorDim / 2, 0.1, floorDim / 2]} position={[0, -0.4, 0]} />
-      <Plane args={[floorDim, floorDim, 10]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+      <CuboidCollider args={[floorDim, 0.1, floorDim]} position={[0, -0.4, 0]} />
+      <Plane args={[floorDim * 2, floorDim * 2, 10]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <primitive object={waveShaderMaterial} />
       </Plane>
     </RigidBody>

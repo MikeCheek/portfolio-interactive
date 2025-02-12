@@ -40,7 +40,7 @@ interface TelevisionTypes extends Body {
 
 extend({ RoundedPlaneGeometry: geometry.RoundedPlaneGeometry });
 
-export function Television({ imageUrl, videoUrl, title, rotation, position, description, href, github, scale = 8, ...props }: TelevisionTypes) {
+export function Television({ imageUrl, videoUrl, title, rotation, position, description, href, github, scale = 9, ...props }: TelevisionTypes) {
   const { nodes, materials } = useGLTF('/assets/models/Television.glb') as GLTFResult;
   const [videoTexture, setVideoTexture] = useState<VideoTexture | null>(null);
 

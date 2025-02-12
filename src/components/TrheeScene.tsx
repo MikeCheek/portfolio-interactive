@@ -5,9 +5,7 @@ import Room from './Room';
 import Domino from './Domino';
 import Projects from './Projects';
 import { Vector3 } from 'three';
-// import Carousel from './Carousel';
-// import { useFrame } from '@react-three/fiber';
-// import { easing } from 'maath';
+import { TrafficSign } from './TrafficSign';
 
 const ThreeScene: React.FC = () => {
   // useFrame((state, delta) => {
@@ -20,15 +18,15 @@ const ThreeScene: React.FC = () => {
       <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
       <pointLight position={[10, 10, 10]} />
       <OrbitControls
-        maxPolarAngle={dev ? undefined : Math.PI / 2}  // Limit vertical rotation to not go upside down
-        minPolarAngle={dev ? undefined : Math.PI / 3}  // Limit minimum vertical rotation
+        maxPolarAngle={dev ? undefined : Math.PI / 2}
+        minPolarAngle={dev ? undefined : Math.PI / 3}
       />
-      {/* <Carousel /> */}
 
       <group position={[0, -1, 0]}>
         <Room />
         <Domino />
-        <Projects position={new Vector3(-30, 0, -30)} />
+        <TrafficSign position={[-1, -0.5, -1]} scale={[0.7, 0.7, 0.7]} />
+        <Projects position={new Vector3(-50, 0, -10)} />
         <CharacterController />
       </group>
     </>
