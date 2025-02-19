@@ -26,7 +26,7 @@ const ThreeScene: React.FC = () => {
         <Room />
         <Domino />
         <TrafficSign position={[-1, -0.5, -1]} scale={[0.7, 0.7, 0.7]} />
-        <Projects position={new Vector3(-50, 0, -10)} />
+        <Projects position={new Vector3(-40, 0, -10)} />
         <CharacterController />
       </group>
     </>

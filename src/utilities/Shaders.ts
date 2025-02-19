@@ -57,12 +57,14 @@ float snoise(vec2 v) {
 float getElevation(float x, float z) {
   vec2 pos = vec2(x, z);
 
+  const int MAX_ITER = 10;
   float elevation = 0.0;
   float amplitude = 1.0;
   float frequency = uWavesFrequency;
   vec2 p = pos.xy;
 
-  for(float i = 0.0; i < uWavesIterations; i++) {
+  for (int i = 0; i < MAX_ITER; i++) {
+    if(i >= int(uWavesIterations)) break;
     float noiseValue = snoise(p * frequency + uTime * uWavesSpeed);
     elevation += amplitude * noiseValue;
     amplitude *= uWavesPersistence;
@@ -81,9 +83,20 @@ void main() {
   modelPosition.y += elevation;
 
   // Calculate normal using partial derivatives
-  float eps = 0.001;
-  vec3 tangent = normalize(vec3(eps, getElevation(modelPosition.x - eps, modelPosition.z) - elevation, 0.0));
-  vec3 bitangent = normalize(vec3(0.0, getElevation(modelPosition.x, modelPosition.z - eps) - elevation, eps));
+  // float eps = 0.001;
+  // vec3 tangent = normalize(vec3(eps, getElevation(modelPosition.x - eps, modelPosition.z) - elevation, 0.0));
+  // vec3 bitangent = normalize(vec3(0.0, getElevation(modelPosition.x, modelPosition.z - eps) - elevation, eps));
+  // vec3 objectNormal = normalize(cross(tangent, bitangent));
+
+  float dx = 0.001;
+  float dz = 0.001;
+  float elevationX1 = getElevation(modelPosition.x + dx, modelPosition.z);
+  float elevationX2 = getElevation(modelPosition.x - dx, modelPosition.z);
+  float elevationZ1 = getElevation(modelPosition.x, modelPosition.z + dz);
+  float elevationZ2 = getElevation(modelPosition.x, modelPosition.z - dz);
+
+  vec3 tangent = normalize(vec3(2.0 * dx, elevationX1 - elevationX2, 0.0));
+  vec3 bitangent = normalize(vec3(0.0, elevationZ1 - elevationZ2, 2.0 * dz));
   vec3 objectNormal = normalize(cross(tangent, bitangent));
 
   vNormal = objectNormal;
