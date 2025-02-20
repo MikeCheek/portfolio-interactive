@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Environment, OrbitControls, Stars } from '@react-three/drei';
 import CharacterController from './CharacterController';
 import Room from './Room';
@@ -14,6 +14,13 @@ const ThreeScene: React.FC = () => {
   //   easing.damp3(state.camera.position, [-state.pointer.x * 2, state.pointer.y + 1.5, 10], 0.3, delta); // Move camera
   // });
   const dev = !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+
   return (
     <>
       <Environment preset="sunset" />
@@ -22,13 +29,16 @@ const ThreeScene: React.FC = () => {
       <OrbitControls
         maxPolarAngle={dev ? undefined : Math.PI / 2}
         minPolarAngle={dev ? undefined : Math.PI / 3}
+        enableZoom={!isTouchDevice}  // Disable zoom on touch devices
+        enableRotate={!isTouchDevice} // Disable rotation
+        enablePan={!isTouchDevice}
       />
 
       <GroundProvider>
         <group position={[0, -1, 0]}>
           <Room />
-          <Domino position={new Vector3(8, 0, 10)} />
-          <Stairs position={new Vector3(5, -0.2, -8)} />
+          <Domino position={new Vector3(15, 0, 15)} />
+          <Stairs position={new Vector3(15, -0.2, -10)} />
           <TrafficSign position={[-1, -0.5, -1]} scale={[0.7, 0.7, 0.7]} />
           <Projects position={new Vector3(-40, 0, -10)} />
           <CharacterController />

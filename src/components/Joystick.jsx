@@ -6,7 +6,6 @@ const JoystickControls = ({ onMoveFunc }) => {
   const [isTouchscreen, setIsTouchscreen] = useState(false);
 
   useEffect(() => {
-    // Check if the device supports touch events
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     setIsTouchscreen(isTouchDevice);
   }, []);
@@ -17,7 +16,11 @@ const JoystickControls = ({ onMoveFunc }) => {
   return (
     <div style={styles.container}> 
       <ReactNipple
-        options={{ mode: "static", position: { right: "70px", bottom: "50px" }}}
+        options={{ 
+          mode: "static", 
+          position: { right: "70px", bottom: "80px" },
+          size: 150,
+        }}
         onMove={(event, data) => {
           if (data.direction) onMoveFunc(data.direction.angle);
         }}
@@ -30,7 +33,7 @@ const JoystickControls = ({ onMoveFunc }) => {
 const styles = {
   container: {
     position: "absolute",
-    bottom: "50px",
+    bottom: "80px",
     right: "70px",
     zIndex: 1000,
   },

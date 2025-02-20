@@ -41,7 +41,7 @@ const Stair = ({
 
   useEffect(() => {
     if (!isWon && isOnGround) setColor('orange')
-  }, [isOnGround])
+  }, [isOnGround, isWon])
 
   return (
     <RigidBody

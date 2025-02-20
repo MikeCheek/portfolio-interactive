@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo } from 'react';
+import React, { Suspense, useEffect, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import ThreeScene from './components/TrheeScene';
 import { Physics } from '@react-three/rapier';
@@ -47,7 +47,25 @@ function App() {
       // Press the corresponding key
       window.dispatchEvent(new KeyboardEvent("keydown", { key: keyMap[direction as keyof typeof keyMap] }));
     }
-  };
+  }
+
+  useEffect(() => {
+    const handleTouch = (event: TouchEvent) => {
+      // Prevent jump if the user is clicking on UI elements (buttons, joystick, etc.)
+      if ((event.target as HTMLElement).closest(".ui-element")) return;
+
+      window.dispatchEvent(new KeyboardEvent("keydown", { key: "Space" }));
+      setTimeout(() => {
+        window.dispatchEvent(new KeyboardEvent("keyup", { key: "Space" }));
+      }, 100); // Simulate a short keypress
+    };
+
+    document.addEventListener("touchstart", handleTouch);
+
+    return () => {
+      document.removeEventListener("touchstart", handleTouch);
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -64,7 +82,9 @@ function App() {
           <Loader />
         </KeyboardControls>
         <ControlsUI />
-        <JoystickControls onMoveFunc={handleJoystickMove} />
+        <div className='ui-element'>
+          <JoystickControls onMoveFunc={handleJoystickMove} />
+        </div>
       </main>
     </div>
   );
