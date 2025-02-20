@@ -6,6 +6,8 @@ import Domino from './Domino';
 import Projects from './Projects';
 import { Vector3 } from 'three';
 import { TrafficSign } from './TrafficSign';
+import Stairs from './Stairs';
+import { GroundProvider } from '../utilities/GroundContext';
 
 const ThreeScene: React.FC = () => {
   // useFrame((state, delta) => {
@@ -22,13 +24,16 @@ const ThreeScene: React.FC = () => {
         minPolarAngle={dev ? undefined : Math.PI / 3}
       />
 
-      <group position={[0, -1, 0]}>
-        <Room />
-        <Domino />
-        <TrafficSign position={[-1, -0.5, -1]} scale={[0.7, 0.7, 0.7]} />
-        <Projects position={new Vector3(-40, 0, -10)} />
-        <CharacterController />
-      </group>
+      <GroundProvider>
+        <group position={[0, -1, 0]}>
+          <Room />
+          <Domino position={new Vector3(8, 0, 10)} />
+          <Stairs position={new Vector3(5, -0.2, -8)} />
+          <TrafficSign position={[-1, -0.5, -1]} scale={[0.7, 0.7, 0.7]} />
+          <Projects position={new Vector3(-40, 0, -10)} />
+          <CharacterController />
+        </group>
+      </GroundProvider>
     </>
   );
 };

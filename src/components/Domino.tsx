@@ -1,10 +1,11 @@
 import { Box } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import React from 'react';
+import { Vector3 } from 'three';
 
-const Domino = ({ x = 10, y = 0 }: { x?: number; y?: number }) => {
+const Domino = ({ position = new Vector3(10, 0, 0) }: { position?: Vector3 }) => {
   return (
-    <group position={[x, y, 0]}>
+    <group position={position}>
       {[...Array(10)].map((_, i) => (
         <Tile step={i} key={i} />
       ))}

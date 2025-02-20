@@ -4,6 +4,7 @@ import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import React, { useMemo } from 'react';
 import { Color, DoubleSide, ShaderMaterial } from 'three';
 import { fragmentShader, vertexShader } from '../utilities/Shaders';
+import { useGround } from '../utilities/GroundContext';
 
 const color = '#232323';
 
@@ -25,6 +26,7 @@ const Room = () => {
 
 const Floor = () => {
   const environmentMap = useEnvironment({ preset: 'sunset' })
+  const { setIsOnGround } = useGround()
 
   const waveShaderMaterial = useMemo(() => {
     return new ShaderMaterial({
@@ -62,7 +64,10 @@ const Floor = () => {
   });
 
   return (
-    <RigidBody colliders={false} type="fixed" position={[0, -0.5, 0]} friction={2} name="floor">
+    <RigidBody colliders={false}
+      onCollisionEnter={({ other }) => other.rigidBodyObject?.name === "character" ? setIsOnGround(true) : null}  // Set to true when touching ground
+      onCollisionExit={({ other }) => other.rigidBodyObject?.name === "character" ? setIsOnGround(false) : null}
+      type="fixed" position={[0, -0.5, 0]} friction={2} name="floor">
       <CuboidCollider args={[floorDim, 0.1, floorDim]} position={[0, -0.4, 0]} />
       <Plane args={[floorDim * 2, floorDim * 2, 10]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <primitive object={waveShaderMaterial} />
