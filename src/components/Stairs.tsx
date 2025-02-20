@@ -51,7 +51,7 @@ const Stair = ({
       friction={2}
       onCollisionEnter={() => {
         setColor('#aa5500')
-        if (num == 10)
+        if (num === 10)
           won()
       }
       } // Darker color on collision
