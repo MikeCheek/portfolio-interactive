@@ -18,6 +18,7 @@ const PopUp = ({
   return (
     <Html position={[0, 1, 0]} center>
       <div
+        className="ui-element"
         style={{
           background: "rgba(0, 0, 0, 0.3)", // Frosted glass effect
           padding: "20px",

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Environment, OrbitControls, Stars } from '@react-three/drei';
+import { Environment, OrbitControls, PerspectiveCamera, Stars } from '@react-three/drei';
 import CharacterController from './CharacterController';
 import Room from './Room';
 import Domino from './Domino';
@@ -26,13 +26,15 @@ const ThreeScene: React.FC = () => {
       <Environment preset="sunset" />
       <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
       <pointLight position={[10, 10, 10]} />
-      <OrbitControls
-        maxPolarAngle={dev ? undefined : Math.PI / 2}
-        minPolarAngle={dev ? undefined : Math.PI / 3}
-        enableZoom={!isTouchDevice}  // Disable zoom on touch devices
-        enableRotate={!isTouchDevice} // Disable rotation
-        enablePan={!isTouchDevice}
-      />
+      <PerspectiveCamera makeDefault position={[5, 10, 5]} fov={isTouchDevice ? 55 : 35}>
+        <OrbitControls
+          maxPolarAngle={dev ? undefined : Math.PI / 2}
+          minPolarAngle={dev ? undefined : Math.PI / 3}
+          enableZoom={!isTouchDevice}  // Disable zoom on touch devices
+          enableRotate={!isTouchDevice} // Disable rotation
+          enablePan={!isTouchDevice}
+        />
+      </PerspectiveCamera>
 
       <GroundProvider>
         <group position={[0, -1, 0]}>

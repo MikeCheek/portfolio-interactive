@@ -33,10 +33,10 @@ const DominoScene = ({ position = new Vector3(0, 0, 0) }: { position?: Vector3 }
         <Box args={[4, 2, 0.1]}>
           <meshStandardMaterial color="orange" />
         </Box>
-        <Text position={[0, 0.2, 0.1]} fontSize={0.5} fontWeight={500} color="black">
+        <Text position={[0, 0.2, 0.1]} fontSize={0.4} fontWeight={500} color="black">
           Pattern: {currentPattern.toUpperCase()}
         </Text>
-        <Text position={[0, -0.5, 0.1]} fontSize={0.3} color="black">
+        <Text position={[0, -0.5, 0.1]} fontSize={0.2} color="black">
           (Hit to change)
         </Text>
       </RigidBody>
@@ -60,7 +60,6 @@ const Domino = ({ pattern }: { pattern: string }) => {
 const getPatternPosition = (index: number, type: string, spacing: number): { position: Vector3; rotation: Euler } => {
   let position = new Vector3();
   let rotation = new Euler(0, 0, (Math.random() - 0.5) * TILT); // Default slight tilt
-  const epsilon = 0.0001;
 
   switch (type) {
     case "zigzag":
